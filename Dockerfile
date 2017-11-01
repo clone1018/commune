@@ -1,5 +1,5 @@
 
-FROM library/elixir:1.3.4
+FROM library/elixir:1.5
 MAINTAINER Luke Strickland (@clone1018)
 
 ENV DEBIAN_FRONTEND noninteractive
