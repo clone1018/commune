@@ -1,0 +1,44 @@
+<script>
+  IO.puts("I live in a Simplate")
+  request_method = conn.method
+
+  if conn.method == "POST" do
+
+    timestamp = :os.system_time(:seconds)
+    %{"message" => message} = conn.params 
+
+    case :ets.member(:commune_messages, "topic") do
+        false ->
+            true = :ets.insert(:commune_messages, {"topic", [message]})
+        true ->
+            [{_channel, messages}]= :ets.lookup(:commune_messages, "topic")
+            :ets.insert(:commune_messages, {"topic", [message | messages]})
+    end
+
+    conn
+        |> Plug.Conn.put_resp_header("location", "/")
+        |> Plug.Conn.resp(301, "You are being redirected.")
+        |> Plug.Conn.halt
+
+  end
+</script>
+
+<template>
+
+    <h1>Submit</h1>
+
+    <a href="/">Home</a>
+
+    <form method="POST">
+        <label for="message">Message</label>
+        <input type="text" id="message" name="message" autofocus>
+        <input type="submit">
+    </form>
+
+
+  <div id="javascriptTest"></div>
+
+  <script>
+    document.querySelector('#javascriptTest').innerHTML = "Javascript works!"
+  </script>
+</template>

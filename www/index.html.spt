@@ -1,0 +1,18 @@
+<script>
+  IO.puts("I live in a Simplate")
+  rand_num = :rand.uniform(10)
+
+  [{_channel, messages}] = :ets.lookup(:commune_messages, "topic")
+</script>
+
+<template>
+  <h1>Commune!</h1>
+  <a href="/submit">Submit</a>
+
+<ul>
+  <%= for item <- messages do %>
+    <li><%= item %></li>
+  <% end %>
+  </ul>
+
+</template>

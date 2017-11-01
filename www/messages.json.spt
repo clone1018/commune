@@ -1,0 +1,9 @@
+<script>
+    [{_channel, messages}] = :ets.lookup(:commune_messages, "topic")
+    
+    json = Poison.encode!(messages)
+</script>
+
+<template>
+<%= json %>
+</template>
